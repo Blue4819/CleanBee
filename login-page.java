@@ -21,7 +21,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
- 
+        addActions();
     }
    public void setLayoutManager()
    {
@@ -52,6 +52,18 @@ public class LoginFrame extends JFrame implements ActionListener {
        container.add(resetButton);
    }
  
+ 
+  public void addActions() {
+	   showPassword.addActionListener(new ActionListener() {
+	      	public void actionPerformed(ActionEvent e) {
+	      		if (showPassword.isSelected()) {
+	      			passwordField.setEchoChar((char)0);
+	      		}
+	      		else {
+	      			passwordField.setEchoChar('*');
+	      		}
+	      	}
+	      });
  
     @Override
     public void actionPerformed(ActionEvent e) {
