@@ -29,15 +29,6 @@ public class DataExtract{
     public static List send()
     {
         run();
-        List<Integer> points = new ArrayList<>();
-        points.add(0);
-        points.add(0);
-        points.add(0);
-        points.add(0);
-        
-        if(dist.isEmpty())
-            return points;
-        else
         return dist;
     }
     
