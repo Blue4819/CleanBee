@@ -12,6 +12,8 @@ class DisplayData extends JFrame implements ActionListener
     private JButton refresh;
     private JButton clear;
     private JTextArea tout;
+    private JTextArea status;
+    private JLabel utitle;
     static String ToPrint = "";
 
     
@@ -42,11 +44,24 @@ class DisplayData extends JFrame implements ActionListener
         clear.addActionListener(this);
         c.add(clear);
         
+        utitle = new JLabel();
+        utitle.setSize(200, 50);
+        utitle.setText("Dustbin Status");
+        utitle.setLocation(100,100);
+        c.add(utitle);
+        
+        status = new JTextArea();
+        status.setSize(125, 25);
+        status.setLocation(100, 150);
+        status.setEditable(false);
+        c.add(status);
+        
         tout = new JTextArea();
         tout.setSize(300, 400);
         tout.setLocation(500, 100);
         tout.setLineWrap(true);
         tout.setEditable(false);
+        tout.setText("Ultrasonic Sensor Data");
         c.add(tout);
         
         setVisible(true);
@@ -55,22 +70,34 @@ class DisplayData extends JFrame implements ActionListener
     
     public void actionPerformed(ActionEvent e)
     {
+        DataExtract ds = new DataExtract();
+        
+        java.util.List al=ds.Ultrasonic(ds.getUrlContents("https://api.thingspeak.com/channels/1914670/feeds.json?results=2"));
+        int size = al.size();
+        int element = (Integer)(al.get(size-1));
+        String x = "" + element;
+        if(element <=1)
+        x = " Dustbin is FULL";
+        else
+        x = " Dustbin is not full";
+        
         if (e.getSource() == refresh)
         {
-            String data = "Ultrasonic data \n" + ToPrint;
-            tout.setText("Ultrasonic data");
+            status.setText(x);
+            tout.setText("Ultrasonic Sensor Data \n"+al.toString());
         }
         
         if(e.getSource() == clear)
         {
             tout.setText("");
+            status.setText("");
         }
     }
     
     public static void main(String[] args) throws Exception
     {
-        DataExtract obj = new DataExtract();
-        ToPrint = (obj.send().toString());
+//        DataExtract obj = new DataExtract();
+//        ToPrint = (obj.send().toString());
         DisplayData f = new DisplayData();
     }
 }
