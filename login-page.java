@@ -11,8 +11,12 @@ public class LoginFrame extends JFrame implements ActionListener {
     JTextField userTextField=new JTextField();
     JPasswordField passwordField=new JPasswordField();
     JButton loginButton=new JButton("LOGIN");
-    JButton resetButton=new JButton("RESET");
+    JButton resetButton=new JButton("CLEAR");
     JCheckBox showPassword=new JCheckBox("Show Password");
+    JButton ForgotPasswordButton = new JButton("Forgot Password");
+    JLabel lblNewLabel = new JLabel("");
+    
+    
  
  
     LoginFrame()
@@ -37,7 +41,10 @@ public class LoginFrame extends JFrame implements ActionListener {
        showPassword.setBounds(150,250,150,30);
        loginButton.setBounds(50,300,100,30);
        resetButton.setBounds(200,300,100,30);
- 
+       ForgotPasswordButton.setBounds(100, 341, 159, 21);
+       lblNewLabel.setForeground(new Color(255, 0, 0));
+       lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+       lblNewLabel.setBounds(50, 40, 250, 65);
  
    }
    public void addComponentsToContainer()
@@ -50,6 +57,10 @@ public class LoginFrame extends JFrame implements ActionListener {
        container.add(showPassword);
        container.add(loginButton);
        container.add(resetButton);
+       container.add(ForgotPasswordButton);
+       container.add(lblNewLabel);
+       
+       
    }
  
  
@@ -63,14 +74,47 @@ public class LoginFrame extends JFrame implements ActionListener {
 	      			passwordField.setEchoChar('*');
 	      		}
 	      	}
-	      });
+	   });
+	   
+	   resetButton.addActionListener(new ActionListener() {
+	       	public void actionPerformed(ActionEvent e) {
+	       		userTextField.setText("");
+	       		passwordField.setText("");
+	       	}
+	       });
+	   
+	   ForgotPasswordButton.addActionListener(new ActionListener() {
+	       	public void actionPerformed(ActionEvent e) {
+	       		ForgotPassword f=new ForgotPassword();
+	       		f.setVisible(true);
+	       	}
+	       });
+	   
+	   
+	   loginButton.addActionListener(new ActionListener() {
+	       	public void actionPerformed(ActionEvent e) {
+	       		if(userTextField.getText().isEmpty()||passwordField.getText().isEmpty()) {
+	       			
+	       			lblNewLabel.setText("Incorrect Password or Username");
+	       		}
+	       		else {
+	       			MainPage mp=new MainPage();
+	       			mp.setVisible(true);
+	       		}
+	       	}
+	       });
   }
- 
-    @Override
-    public void actionPerformed(ActionEvent e) {
- 
-    }
+@Override
+public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+	
 }
+ 
+    
+    
+}
+ 
+
  
 public class Login {
     public static void main(String[] a){
