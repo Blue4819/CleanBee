@@ -162,8 +162,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 						ResultSet rs=stm.executeQuery(sql);
 						if(rs.next()) {
 							dispose();
-							MainPage mp= new MainPage();
-							mp.setVisible(true);
+							DisplayData d = new DisplayData();
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "username or password wrong");
