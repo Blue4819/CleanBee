@@ -25,9 +25,11 @@ class DisplayData extends JFrame implements ActionListener
         setResizable(true);
         
         c = getContentPane();
+        c.setBackground(new Color(0, 0, 163));
         c.setLayout(null);
         
         title = new JLabel("Sensors Data");
+        title.setForeground (Color.white);
         title.setSize(300, 30);
         title.setLocation(300, 30);
         c.add(title);
@@ -47,6 +49,7 @@ class DisplayData extends JFrame implements ActionListener
         utitle = new JLabel();
         utitle.setSize(200, 50);
         utitle.setText("Dustbin Status");
+        utitle.setForeground(Color.white);
         utitle.setLocation(100,100);
         c.add(utitle);
         
@@ -75,9 +78,12 @@ class DisplayData extends JFrame implements ActionListener
         java.util.List al=ds.Ultrasonic(ds.getUrlContents("https://api.thingspeak.com/channels/1914670/feeds.json?results=2"));
         int size = al.size();
         int element = (Integer)(al.get(size-1));
-        String x = "" + element;
+        
         if(element <=1)
+        {
         x = " Dustbin is FULL";
+        SendMessage s = new SendMessage();
+        }
         else
         x = " Dustbin is not full";
         
