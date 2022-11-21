@@ -19,8 +19,8 @@ public class Login {
 }
 
 
-// LoginFrame
 
+// LoginFrame
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,150 +35,174 @@ import java.sql.Statement;
 import java.awt.Font;
 
 public class LoginFrame extends JFrame implements ActionListener {
- 
-    private static final long serialVersionUID = 1L;
-	Container container=getContentPane();
-    
-	JLabel heading=new JLabel("CYBERICS");
-	JLabel userLabel=new JLabel("USERNAME");
-    JLabel passwordLabel=new JLabel("PASSWORD");
-    JTextField userTextField=new JTextField();
-    JPasswordField passwordField=new JPasswordField(16);
-    JButton loginButton=new JButton("LOGIN");
-    JButton resetButton=new JButton("CLEAR");
-    JCheckBox showPassword=new JCheckBox("Show Password");
-    JButton ForgotPasswordButton = new JButton("Forgot Password");
-    JLabel lblNewLabel = new JLabel("");
-    
-    
- 
- 
-    LoginFrame()
-    {
-       //Calling methods inside constructor.
-        setLayoutManager();
-        setLocationAndSize();
-        addComponentsToContainer();
-        addActions();
-    }
-   public void setLayoutManager()
-   {
-       container.setLayout(null);
-       container.setBackground(new Color(0,0,163));
-   }
-   public void setLocationAndSize()
-   {
-       //Setting location and Size of each components using setBounds() method.
-       userLabel.setBounds(50,150,100,30);
-       userLabel.setForeground(Color.white);
-       heading.setBounds(100,70,300,30);
-       heading.setForeground(Color.white);
-       heading.setFont(new Font("Serif",Font.BOLD,30));
-       passwordLabel.setBounds(50,220,100,30);
-       passwordLabel.setForeground(Color.WHITE);
-       userTextField.setBounds(150,150,150,30);
-       passwordField.setBounds(150,220,150,30);
-       showPassword.setBounds(150,250,150,30);
-       showPassword.setOpaque(false);
-       showPassword.setForeground(Color.white);
-       loginButton.setBounds(50,300,100,30);
-       resetButton.setBounds(200,300,100,30);
-       ForgotPasswordButton.setBounds(100, 341, 159, 21);
-       ForgotPasswordButton.setBackground(Color.DARK_GRAY);
-       ForgotPasswordButton.setForeground(Color.white);
-       ForgotPasswordButton.setBorderPainted(false);
-       lblNewLabel.setForeground(new Color(255, 0, 0));
-       lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-       lblNewLabel.setBounds(50, 40, 250, 65);
- 
-   }
-   public void addComponentsToContainer()
-   {
-      //Adding each components to the Container
-       container.add(userLabel);
-       container.add(passwordLabel);
-       container.add(userTextField);
-       container.add(passwordField);
-       container.add(showPassword);
-       container.add(loginButton);
-       container.add(resetButton);
-       container.add(ForgotPasswordButton);
-       container.add(lblNewLabel);
-       container.add(heading);
-       
-       
-   }
-   {}
- 
- 
-  public void addActions() {
-	   showPassword.addActionListener(new ActionListener() {
-	      	public void actionPerformed(ActionEvent e) {
-	      		if (showPassword.isSelected()) {
-	      			passwordField.setEchoChar((char)0);
-	      		}
-	      		else {
-	      			passwordField.setEchoChar('*');
-	      		}
-	      	}
-	   });
-	   
-	   resetButton.addActionListener(new ActionListener() {
-	       	public void actionPerformed(ActionEvent e) {
-	       		userTextField.setText("");
-	       		passwordField.setText("");
-	       	}
-	       });
-	   
-	   ForgotPasswordButton.addActionListener(new ActionListener() {
-	       	public void actionPerformed(ActionEvent e) {
-	       		ForgotPassword f=new ForgotPassword();
-	       		f.setVisible(true);
-	       	}
-	       });
-	   
-	   
-	   loginButton.addActionListener(new ActionListener() {
-	       	@SuppressWarnings("deprecation")
+
+	private static final long serialVersionUID = 1L;
+	Container container = getContentPane();
+
+	JLabel heading = new JLabel("CYBERICS");
+	JLabel userLabel = new JLabel("USERNAME");
+	JLabel passwordLabel = new JLabel("PASSWORD");
+	JTextField userTextField = new JTextField();
+	JPasswordField passwordField = new JPasswordField(16);
+	JButton loginButton = new JButton("LOGIN");
+	JButton resetButton = new JButton("CLEAR");
+	JCheckBox showPassword = new JCheckBox("Show Password");
+	JButton ForgotPasswordButton = new JButton("Forgot Password");
+	JLabel lblNewLabel = new JLabel("");
+	JLabel lblNewLabel_1 = new JLabel("Don't have an Account?");
+	JButton SignUpButton = new JButton("Sign Up");
+
+	LoginFrame() {
+		// Calling methods inside constructor.
+		setLayoutManager();
+		setLocationAndSize();
+		addComponentsToContainer();
+		addActions();
+	}
+
+	public void setLayoutManager() {
+		container.setBackground(new Color(0, 0, 163));
+	}
+
+	public void setLocationAndSize() {
+		userLabel.setBounds(50, 150, 100, 30);
+		userLabel.setForeground(Color.white);
+		heading.setBounds(100, 70, 300, 30);
+		heading.setForeground(Color.white);
+		heading.setFont(new Font("Serif", Font.BOLD, 30));
+		passwordLabel.setBounds(50, 220, 100, 30);
+		passwordLabel.setForeground(Color.WHITE);
+		showPassword.setBounds(150, 250, 150, 30);
+		showPassword.setOpaque(false);
+		showPassword.setForeground(Color.white);
+		ForgotPasswordButton.setBounds(100, 341, 159, 21);
+		ForgotPasswordButton.setBackground(new Color(255, 255, 255));
+		ForgotPasswordButton.setForeground(new Color(0, 0, 0));
+		ForgotPasswordButton.setBorderPainted(false);
+		lblNewLabel.setBounds(50, 10, 250, 65);
+		lblNewLabel.setForeground(new Color(255, 0, 0));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_1.setBounds(50, 398, 164, 13);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		SignUpButton.setBounds(215, 396, 85, 21);
+		SignUpButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+
+	}
+
+	public void addComponentsToContainer() {
+		getContentPane().setLayout(null);
+		// Adding each components to the Container
+		container.add(userLabel);
+		container.add(passwordLabel);
+		userTextField.setBounds(150, 150, 150, 30);
+		container.add(userTextField);
+		passwordField.setBounds(150, 220, 150, 30);
+		container.add(passwordField);
+		container.add(showPassword);
+		loginButton.setBounds(50, 300, 100, 30);
+		container.add(loginButton);
+		resetButton.setBounds(200, 300, 100, 30);
+		container.add(resetButton);
+		container.add(ForgotPasswordButton);
+		container.add(lblNewLabel);
+		container.add(heading);
+		container.add(lblNewLabel_1);
+		container.add(SignUpButton);
+
+	}
+
+	{
+	}
+
+	public void addActions() {
+		showPassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	       		if(userTextField.getText().isEmpty()||passwordField.getText().isEmpty()) {
-	       			
-	       			lblNewLabel.setText("Incorrect Password or Username");
-	       		}
-	       		else {
-	       			try {
+				if (showPassword.isSelected()) {
+					passwordField.setEchoChar((char) 0);
+				} else {
+					passwordField.setEchoChar('*');
+				}
+			}
+		});
+
+		resetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				userTextField.setText("");
+				passwordField.setText("");
+			}
+		});
+
+		ForgotPasswordButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ForgotPassword f = new ForgotPassword();
+				f.setVisible(true);
+			}
+		});
+		
+		SignUpButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateAccount ca=new CreateAccount();
+				ca.setVisible(true);
+			}
+		});
+
+		loginButton.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				if (userTextField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+
+					lblNewLabel.setText("Incorrect Password or Username");
+				} else {
+					try {
 						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/LoginPage","root","Cyberics@7");
-						
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LoginPage", "root",
+								"Cyberics@7");
+
 						String Username = userTextField.getText();
 						String PassWord = passwordField.getText();
-						
+
 //						System.out.print(Username+" "+PassWord);
-						
+
 //						
-						Statement stm= con.createStatement();
-						String sql="Select * from Loginid where Username='"+Username+"' and PassWord='"+PassWord+"'";
+						Statement stm = con.createStatement();
+						String sql = "Select * from Loginid where Username='" + Username + "' and PassWord='" + PassWord
+								+ "'";
 						System.out.print(sql);
-						ResultSet rs=stm.executeQuery(sql);
-						if(rs.next()) {
+						ResultSet rs = stm.executeQuery(sql);
+						if (rs.next()) {
 							dispose();
 							DisplayData d = new DisplayData();
-						}
-						else {
+						} else {
 							JOptionPane.showMessageDialog(null, "username or password wrong");
 							userLabel.setText("");
 							passwordLabel.setText("");
 						}
 						con.close();
-	       		}catch(Exception e1) {
-	       			e1.printStackTrace();
-	       			
-	       		}
-	       			//{System.out.print(e1);}
-	       	}
-	       	}});}
-@Override
-public void actionPerformed(ActionEvent e) {
-	// TODO Auto-generated method stub
+					} catch (Exception e1) {
+						e1.printStackTrace();
+
+					}
+					// {System.out.print(e1);}
+				}
+			}
+		});
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
 	
-}}
+	
+	
+	
+//	public static void main(String[] args) {
+//		LoginFrame lf=new LoginFrame();
+//		lf.setVisible(true);
+//		lf.pack();
+//		lf.setBounds(10,10,370,600);
+//	}
+}
