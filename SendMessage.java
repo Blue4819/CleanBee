@@ -18,7 +18,6 @@ class SendMessage extends JFrame
         c.setLayout(null);
 		
 		textField.setText("Dustbin is full. Administration will send someone to clear it");
-		textField.setLineWrap(true);
 		textField.setFont(new Font("Tahoma", Font.BOLD, 15));
         textField.setBounds(33, 10, 377, 117);
 		c.add(textField);
