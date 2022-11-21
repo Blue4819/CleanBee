@@ -78,7 +78,7 @@ class DisplayData extends JFrame implements ActionListener
         java.util.List al=ds.Ultrasonic(ds.getUrlContents("https://api.thingspeak.com/channels/1914670/feeds.json?results=2"));
         int size = al.size();
         int element = (Integer)(al.get(size-1));
-        
+        String x = "";
         if(element <=1)
         {
         x = " Dustbin is FULL";
