@@ -6,7 +6,6 @@ import java.awt.event.*;
 
 class DisplayData extends JFrame implements ActionListener
 {
-    
     private Container c;
     private JLabel title;
     private JButton refresh;
@@ -15,12 +14,12 @@ class DisplayData extends JFrame implements ActionListener
     private JTextArea status;
     private JLabel utitle;
     static String ToPrint = "";
-
+    DrawGraph graph = new DrawGraph();
     
     public DisplayData()
     {
         setTitle("Sensors Data");
-        setBounds(300,90,900,600);
+        setBounds(300,90,900,700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
         
@@ -36,13 +35,13 @@ class DisplayData extends JFrame implements ActionListener
         
         refresh = new JButton("Refresh");
         refresh.setSize(100, 20);
-        refresh.setLocation(150, 450);
+        refresh.setLocation(150, 550);
         refresh.addActionListener(this);
         c.add(refresh);
         
         clear = new JButton("Reset");
         clear.setSize(100, 20);
-        clear.setLocation(270, 450);
+        clear.setLocation(270, 550);
         clear.addActionListener(this);
         c.add(clear);
         
@@ -61,11 +60,18 @@ class DisplayData extends JFrame implements ActionListener
         
         tout = new JTextArea();
         tout.setSize(300, 400);
-        tout.setLocation(500, 100);
+        tout.setLocation(550, 100);
         tout.setLineWrap(true);
         tout.setEditable(false);
         tout.setText("Ultrasonic Sensor Data");
         c.add(tout);
+        
+        JPanel app = new JPanel();
+        app.add(graph);
+        app.setSize(400, 400);
+        app.setLocation(100, 200);
+                
+        c.add(app); 
         
         setVisible(true);
     }
@@ -78,7 +84,7 @@ class DisplayData extends JFrame implements ActionListener
         java.util.List al=ds.Ultrasonic(ds.getUrlContents("https://api.thingspeak.com/channels/1914670/feeds.json?results=2"));
         int size = al.size();
         int element = (Integer)(al.get(size-1));
-        String x = "";
+        String x = "" + element;
         if(element <=1)
         {
         x = " Dustbin is FULL";
@@ -89,6 +95,14 @@ class DisplayData extends JFrame implements ActionListener
         
         if (e.getSource() == refresh)
         {
+            
+            graph = new DrawGraph(al);
+            JPanel app = new JPanel();
+            app.add(graph);
+            app.setSize(400, 400);
+            app.setLocation(100, 200);
+                
+                c.add(app); 
             status.setText(x);
             tout.setText("Ultrasonic Sensor Data \n"+al.toString());
         }
@@ -102,8 +116,6 @@ class DisplayData extends JFrame implements ActionListener
     
     public static void main(String[] args) throws Exception
     {
-//        DataExtract obj = new DataExtract();
-//        ToPrint = (obj.send().toString());
         DisplayData f = new DisplayData();
     }
 }
