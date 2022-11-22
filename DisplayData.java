@@ -81,11 +81,13 @@ class DisplayData extends JFrame implements ActionListener
     {
         DataExtract ds = new DataExtract();
         
-        java.util.List al=ds.Ultrasonic(ds.getUrlContents("https://api.thingspeak.com/channels/1914670/feeds.json?results=2"));
-        int size = al.size();
-        int element = (Integer)(al.get(size-1));
+        java.util.List al = ds.Ultrasonic(ds.getUrlContents("https://api.thingspeak.com/channels/1914670/feeds.json?results=2"));
+        java.util.List <Integer> value = al.subList(al.size()-10, al.size());
+        int size = value.size();
+        
+        int element = (Integer)(value.get(size-1));
         String x = "" + element;
-        if(element <=1)
+        if(element <=3)
         {
         x = " Dustbin is FULL";
         SendMessage s = new SendMessage();
@@ -95,7 +97,7 @@ class DisplayData extends JFrame implements ActionListener
         
         if (e.getSource() == refresh)
         {    
-            graph = new DrawGraph(al.subList(al.size()-10, al.size()));
+            graph = new DrawGraph(value);
             JPanel app = new JPanel();
             app.add(graph);
             app.setSize(400, 400);
@@ -104,7 +106,7 @@ class DisplayData extends JFrame implements ActionListener
             c.add(app); 
             
             status.setText(x);
-            tout.setText("Ultrasonic Sensor Data \n"+al.toString());
+            tout.setText("Ultrasonic Sensor Data \n"+ value.toString());
         }
         
         if(e.getSource() == clear)
