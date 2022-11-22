@@ -96,13 +96,14 @@ class DisplayData extends JFrame implements ActionListener
         if (e.getSource() == refresh)
         {
             
-            graph = new DrawGraph(al);
+            graph = new DrawGraph(al.subList(al.size()-10, al.size()));
             JPanel app = new JPanel();
             app.add(graph);
             app.setSize(400, 400);
             app.setLocation(100, 200);
                 
-                c.add(app); 
+            c.add(app); 
+            
             status.setText(x);
             tout.setText("Ultrasonic Sensor Data \n"+al.toString());
         }
