@@ -94,8 +94,7 @@ class DisplayData extends JFrame implements ActionListener
         x = " Dustbin is not full";
         
         if (e.getSource() == refresh)
-        {
-            
+        {    
             graph = new DrawGraph(al.subList(al.size()-10, al.size()));
             JPanel app = new JPanel();
             app.add(graph);
@@ -110,6 +109,13 @@ class DisplayData extends JFrame implements ActionListener
         
         if(e.getSource() == clear)
         {
+            graph = new DrawGraph(Arrays.asList());
+            JPanel app = new JPanel();
+            app.add(graph);
+            app.setSize(400, 400);
+            app.setLocation(100, 200);
+                
+            c.add(app); 
             tout.setText("");
             status.setText("");
         }
